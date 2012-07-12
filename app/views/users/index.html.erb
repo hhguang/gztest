@@ -1,0 +1,43 @@
+<div class="row-fluid">
+  <div class="span3">
+          <div class="well sidebar-nav">
+            <ul class="nav nav-list">
+              <li class="nav-header">系统管理</li>
+              <li ><a href="#">学校管理</a></li>
+              <li><a href="#">区县管理</a></li>
+              <li class="active"><a href="#">用户管理</a></li>
+              <li><a href="#">考试管理</a></li>
+              <li><a href="#">成绩文件管理</a></li>
+              <li><a href="#">成绩管理</a></li>
+              <li class="nav-header">Sidebar</li>
+              <li><a href="#">Link</a></li>
+              <li><a href="#">Link</a></li>
+              <li><a href="#">Link</a></li>
+            </ul>
+          </div><!--/.well -->
+        </div><!--/span-->
+  <div class="span9 ">
+
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>用户名</th>
+          <th>姓名</th>
+          <th>学校</th>
+          <th>操作</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @user.each do |user| %>
+          <tr>
+            <td><%= user.login %></td>
+            <td><%= user.name %></td>
+            <td><%= user.school.name if user.school %></td>
+          </tr>
+        <% end %>
+      </tbody>
+
+    </table>
+  </div><!--/span-->
+</div>

@@ -1,0 +1,34 @@
+
+<% if @file && @file.xls?  %>
+<div class="alert alert-block">
+      <p class="alert-heading">文件检测结果：</p>
+
+      <%= @file.check_result[:sheet_e]  unless @file.check_result[:sheet_e]=='' %>
+      <br/>
+      包含数据：<%= @file.check_result[:j_count] %>；<br/>
+      <% if @file.check_result[:e_count]>0 %>
+      错误数据：<span class="badge badge-warning"><%= @file.check_result[:e_count] %></span>
+      <% end %>
+      <% if @file.check_result[:sheet_e]=='' && @file.check_result[:e_count]==0 %>
+      未检测到错误数据
+      <% end %>
+      <hr/>
+      <a class="btn btn-info" data-toggle="modal" href="#myModal" >查看文件检测详细结果</a>
+</div>
+      
+  <div class="modal hide" id="myModal">
+      <div class="modal-header">
+        <button class="close" data-dismiss="modal">×</button>
+        <h3>文件详情</h3>
+      </div>
+      <div class="modal-body">
+        <p>
+          <%= @file.check[:text] if @file && @file.xls? %>
+        </p>
+      </div>
+      <div class="modal-footer">
+        <a href="#" class="btn" data-dismiss="modal">Close</a>
+
+      </div>
+    </div>
+  <% end %>

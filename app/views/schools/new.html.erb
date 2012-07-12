@@ -1,0 +1,33 @@
+<div class="row-fluid">
+  <div class="span3">
+    <%= render :partial=>'/admin/left'  %>
+  </div>
+  <div class="span9">
+    <div class="page-header">
+      <h1>学校管理</h1>
+    </div>
+<h1>New school</h1>
+
+<% form_for(@school) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :code,"学校代码" %><br />
+    <%= f.text_field :code %>
+  </p>
+  <p>
+    <%= f.label :name,"学校名称" %><br />
+    <%= f.text_field :name %>
+  </p>
+  <p>
+    <%= f.label :qx_id,"区县" %><br />
+    <%= f.collection_select :qx_id,Qx.all,:id,:name %>
+  </p>
+  <p>
+    <%= f.submit 'Create' %>
+  </p>
+<% end %>
+
+<%= link_to 'Back', schools_path %>
+  </div>
+</div>

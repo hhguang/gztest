@@ -1,0 +1,48 @@
+<div class="row-fluid">
+  <div class="span3">
+      <%= render :partial=>'admin/left'  %>
+        </div><!--/span-->
+  <div class="span9 ">
+
+<div class="page-header">
+  <h1>考试管理</h1>
+
+</div>
+<%= link_to '定义考试', new_exam_path,{:class=>'btn '} %>
+<div>
+  <table class="table">
+    <thead>
+  <tr>
+    <th>名称</th>
+    <th>状态</th>
+    <th>操作</th>
+  </tr>
+
+</thead>
+<tbody>
+<% @exams.each do |exam| %>
+  <tr>
+    <td><%=h exam.name %></td>
+    <td><%=h exam.closed? ? '关闭' : '开放' %></td>
+    
+    <td><%= link_to '关闭/开放', :action=>'set_closed',:id=>exam %></td>
+    
+    <td><%#= link_to '显示', exam %></td>
+    <td><%= link_to '修改', edit_exam_path(exam) %></td>
+    <td><%= link_to '删除', exam, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%= link_to "已上传文件[#{exam.score_files.size.to_s}]",:action=>'report',:id=>exam  %></td>
+    <td>
+      <%= link_to '合并文件并下载',:controller=>'exams',:action=>'download',:id=>exam %>
+    </td>
+  </tr>
+<% end %>
+  </tbody>
+</table>
+</div>
+
+
+
+<br />
+  </div><!--/span-->
+</div>
+

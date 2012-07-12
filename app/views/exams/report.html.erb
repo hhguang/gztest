@@ -1,0 +1,73 @@
+<div class="row-fluid">
+  <div class="span3">
+    <%= render :partial=>'admin/left'  %>
+  </div><!--/span-->
+  <div class="span9 ">
+
+    <div class="page-header">
+      <h1>各校成绩文件
+        <small>
+          <%= @exam.name %>
+          <div class="btn-group pull-right">
+          <button data-toggle="dropdown" class="btn btn-info dropdown-toggle">选择其他考试： <span class="caret"></span></button>
+          <ul class="dropdown-menu">
+            <% Exam.all.each do |exam| %>
+            <li>
+              <%= link_to exam.name,:action=>'report',:id=>exam %>
+            </li>
+            <% end %>
+          </ul>
+        </div>
+        </small>
+
+      </h1>
+       
+    </div>
+    <div>
+     
+      
+      <%= link_to '合并文件并下载',{:controller=>'exams',:action=>'download',:id=>@exam},{:class=>'btn'} %>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th >区</th>
+            <th>学校</th>
+            <th>文件</th>
+          </tr>
+
+        </thead>
+        <tbody>
+          
+           <% @schools.each do |school| %>
+          <tr>
+            <td>
+            <%= school.qx.name %>
+            </td>
+           
+            <td>
+              <%= school.name %>
+            </td>
+
+            <td>
+            <% file=school.score_file_for(@exam) %>
+              <%= link_to file.filename,:controller=>'score_files',:action=>'download',:id=>file if file %>
+
+
+          </td>
+          <td>
+            
+
+            <%= file.confirmed? ? '已确认 |' : '未确认' if file %>
+            <%= link_to '重传',:controller=>'score_files',:action=>'re_upload',:id=>file if file && file.confirmed? %>
+          </td>
+          <td>
+            <%= link_to '查看',{:controller=>'welcome',:action=>'file',:id=>file},:popup=>true if file %>
+          </td>
+          </tr>
+          <% end %>
+          
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

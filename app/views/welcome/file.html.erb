@@ -1,0 +1,45 @@
+<% if @file && @file.xls?  %>
+<h2>文件名：<%= @file.filename %>
+</h2>
+
+<ul class="nav nav-tabs" id="myTab">
+  <% i=1 %>
+  <% @data.each do |data| %>
+  <li <%= 'class="active"' if i==1 %> ><a href="#<%= i %>"><%= data[:sheet_name] %></a></li>
+  <% i+=1 %>
+  <% end %>
+</ul>
+
+<div class="tab-content">
+  <% i=1 %>
+  <% @data.each do |data| %>  
+  <div class="tab-pane <%= 'active' if i==1 %>" id="<%= i %>">
+    <table class="table table-striped">
+      
+      <tbody>
+        <% data[:sheet_data].each  do |row| %>
+        <tr>
+          <% row.each do |cell| %>
+          <td>
+            <%= cell %>
+          </td>
+          <% end %>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+  <% i+=1 %>
+  <% end %>
+</div>
+<script>
+      window.onload=function(){
+        $('#myTab a').click(function (e) {
+          e.preventDefault();
+          $(this).tab('show');
+        })
+      }
+    </script>
+<% else %>
+文件不存在或不是.xls文件
+<% end %>

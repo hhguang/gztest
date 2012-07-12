@@ -1,0 +1,121 @@
+<% if current_user.is_admin? %>
+  <div class="hero-unit">
+    <h1>成绩文件上传
+      <small>
+
+      </small>
+    </h1>
+    <hr/>
+    <p>
+      <%= current_user.login %>,您好!
+      你是管理员。
+    </p>
+    <a href="/admin" class="btn btn-primary btn-large">管理页面</a>
+  </div>
+<% else %>
+
+  <div class="hero-unit">
+    <h1>成绩文件上传
+      <small>
+        <%= @exam.name if @exam %>
+      </small>
+    </h1>
+    <hr/>
+    <p>
+      <%= current_user.login %>,您好!
+      你所在学校是：<%= current_user.school.name if current_user.school  %>。
+
+    </p>
+    <% if @exam.nil? %>
+      <div class="alert alert-danger">
+        考试成绩文件提交还没有开始，请等待。。。
+      </div>
+    
+    <% else %>
+      <div class="alert alert-info">
+        请<a href="/mb.xls" >下载模板</a>填入成绩后提交，不要更改工作表名称和顺序，不要更改第一行的列标题和顺序。缺考成绩留空。
+      </div>
+      <p>
+        <a href="/mb.xls" class="btn">下载成绩模板>></a>
+      </p>
+      <% if ! @file  %>
+
+        <% form_for(:score_file,:url=>{:action=>'create'},:html=>{ :multipart => true,:class=>'well form-inline'} ) do |f| %>
+          <%= f.error_messages %>
+          <%= f.hidden_field :exam_id,:value=>@exam.id %>
+          <%= file_field_tag 'score_file[file]', :size => 30, :id => nil  -%>
+          <button type="submit" class="btn btn-primary">上传文件</button>
+
+        <% end %>
+      <% else %>
+        <p>
+          <% if current_user.school && @file %>
+            已经上传文件：<%=  @file.filename %>
+          <% end %>
+          
+      <%#*<a class="btn btn-info"  href="#" id="loadinfo" >检测文件</a>%>
+        </p>
+
+        <% if @score_file.confirmed? %>
+          <div class="alert alert-info">
+            你已经确认提交的文件，如仍需要修改数据请联系管理员
+          </div>
+        <% else %>
+          <% if @file && @file.xls?  %>
+            <div id="info" >
+              <span class="label label-important">请稍候</span><%= image_tag 'loading.gif',:size=>'16x16' %>文件检测中...
+              <hr/>
+            </div>
+          <% end %>
+        <div>
+        <a class="btn btn-info"  href="/welcome/file/<%= @file.id %>" target="_blank">核对文件数据</a>
+        </div>
+        
+          <% form_for(:score_file,:url=>{:action=>'update',:id=>@score_file},:html=>{ :multipart => true,:class=>'well form-inline'} ) do |f| %>
+            <%= f.error_messages %>
+            <%= f.hidden_field :exam_id,:value=>@exam.id %>
+            <span class="label label-important">重要</span>
+              请查看上面的文件检测结果，并核对文件数据。
+            <label>如上传数据有误请更正数据后重新上传文件：</label>
+            <%= file_field_tag 'score_file[file]', :size => 30, :id => nil  -%>
+            <button id="1fat-btn" type="submit" class="btn btn-primary" data-loading-text="请稍候，文件上传中...">上传文件</button>
+
+          <% end %>
+
+            <% form_for(:score_file,:url=>{:action=>'update',:id=>@score_file},:html=>{ :multipart => true,:class=>'well form-inline'} ) do |f| %>
+              <%= f.hidden_field :confirmed,:value=>true %>
+              <span class="label label-important">重要</span>
+              请查看上面的文件检测结果，如果确认上传的数据无误，请单击
+              <button class="btn btn-success ">确认</button>
+              <p class="help-block">
+            <span class="label label-info">注意</span>
+            确认后将不能再提交文件，如仍需要修改数据请联系管理员
+          </p>
+            <% end %>
+          
+          
+
+        <% end %>
+
+      <% end %>
+   
+    <script>
+      window.onload=function(){
+        $("#info").load("/welcome/show/<%= @file.id if @file %>");
+        $("#loadinfo").click(function(){
+          $("#info").append("文件检测中...<image href='/images/loading1.gif'/>")
+          $("#info").load("/welcome/show/17");
+        })
+      }
+    </script>
+  <% end %>
+ </div>
+<div class="page-header">
+  <h1>
+    分析模板
+  </h1>
+</div>
+<a href="/ysy.doc" class="btn">下载语数英质量分析模板>></a>
+<a href="/zsdlhs.doc" class="btn">下载政史地理化生质量分析模板>></a>
+<% end %>
+

@@ -1,0 +1,75 @@
+<div class="row-fluid">
+  <div class="span3">
+    <%= render :partial=>'left'  %>
+  </div>
+  <div class="span9">
+    <div class="page-header">
+      <h1>用户管理</h1>
+    </div>
+    <%= error_messages_for :user %>
+<% form_for :user, :url =>{:action=>'user_update',:id=>@user},:html=>{:class=>'well form-horizontal'} do |f| -%>
+    <fieldset>
+    <legend>编辑用户</legend>
+    <div class="control-group">
+      <label class="control-label" for="login">用户名</label>
+      <div class="controls">
+        <%= f.text_field :login,:class=>'input-xlarge'%>
+      </div>
+    </div>
+    <div class="control-group">
+      <label class="control-label" for="login">姓名</label>
+      <div class="controls">
+        <%= f.text_field :name,:class=>'input-xlarge'%>
+      </div>
+    </div>
+    <div class="control-group">
+      <label class="control-label" for="login">密码</label>
+      <div class="controls">
+        <%= f.password_field :password %>
+      </div>
+    </div>
+    <div class="control-group">
+      <label class="control-label" for="login">密码确认</label>
+      <div class="controls">
+        <%= f.password_field :password_confirmation %>
+      </div>
+    </div>
+    <div class="control-group">
+      <label class="control-label" for="login">学校</label>
+      <div class="controls">
+        <%= collection_select :user, :school_id,School.all, :id,:name,{:include_blank=>true} %>
+        <p class="help-block">此选项管理员留空</p>
+      </div>
+    </div>
+    <div class="control-group">
+      <label class="control-label" for="login">邮箱</label>
+      <div class="controls">
+        <%= f.text_field :email,:class=>'input-xlarge'%>
+      </div>
+    </div>
+    <div class="control-group">
+            <label class="control-label" for="optionsCheckbox">是否管理员</label>
+            <div class="controls">
+              <label class="checkbox">                
+                <%= f.check_box :is_admin %>
+              </label>
+              <p class="help-block">区县教研室账号须设置为管理员，然后在下面选择区县</p>
+            </div>
+          </div>
+    <div class="control-group">
+      <label class="control-label" for="qx">区县教研室</label>
+      <div class="controls">
+        <%= collection_select :user, :qx_id,Qx.all, :id,:name,{:include_blank=>true} %>
+        <p class="help-block">此选项系统管理员留空，区县教研室账号必须选</p>
+      </div>
+    </div>
+    <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Save changes</button>
+            <a class="btn" href="/admin/users">Cancel</a>
+          </div>
+
+
+    </fieldset>
+<% end -%>
+  </div>
+</div>

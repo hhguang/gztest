@@ -1,0 +1,58 @@
+<div class="well sidebar-nav">
+  <ul class="nav nav-list">
+    <li <%= 'class="active"' if controller_name=='admin' && action_name=='index' %> >
+      <a href="/admin">
+        <i class="icon-home"></i>
+        后台管理
+      </a>
+    </li>
+    <li class="divider"></li>
+    <% if logged_in? && current_user.is_admin %>
+    
+    <% if ! current_user.qx_id %>
+    
+    <li class="nav-header" style="font-size: 13px;">系统管理</li>
+    <li <%= 'class="active"' if controller_name=='schools' %> >
+      <a href="/schools">
+        <i class="icon-flag"></i>
+        学校管理</a>
+    </li>
+    <li <%= 'class="active"' if controller_name=='qxes' %>>
+      <a href="/qxes">
+        <i class="icon-star"></i>
+        区县管理</a>
+    </li>
+    <li <%= 'class="active"' if controller_name=='admin' && action_name=='users' || action_name=='user_edit' %> >
+      
+      <a href="/admin/users">
+        <i class="icon-user"></i>
+        用户管理</a>
+    </li>
+    <li <%= 'class="active"' if controller_name=='exams' %> >
+      <a href="/exams">
+        <i class="icon-fire"></i>
+        考试管理</a>
+    </li>
+    <%#*<li <%= 'class="active"' if controller_name=='score_files' && action_name=='index' >%>
+      <%#*<a href="/score_files">%>
+        <%#*<i class="icon-file"></i>%>
+        <%#*成绩文件管理</a>%>
+    <%#*</li>%>
+
+    <% else %>
+    
+    <li class="nav-header" style="font-size: 13px;">区县教育局</li>
+    <li><a href="/admin/files">
+        <i class="icon-file"></i>
+        成绩文件</a>
+    </li>
+    <li <%= 'class="active"' if controller_name=='admin' && action_name=='qx_pwd'  %> >
+
+      <a href="/admin/qx_pwd">
+        <i class="icon-user"></i>
+        用户管理</a>
+    </li>
+    <% end %>
+    <% end %>
+  </ul>
+</div><!--/.well -->

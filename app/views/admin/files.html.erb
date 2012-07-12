@@ -1,0 +1,68 @@
+<div class="row-fluid">
+  <div class="span3">
+    <%= render :partial=>'left'  %>
+  </div>
+  <div class="span9">
+    <div class="page-header">
+      <h1>成绩文件
+      <small>
+          <%= @exam.name %>
+          <div class="btn-group pull-right">
+          <button data-toggle="dropdown" class="btn btn-info dropdown-toggle">选择其他考试： <span class="caret"></span></button>
+          <ul class="dropdown-menu">
+            <% Exam.all.each do |exam| %>
+            <li>
+              <%= link_to exam.name,:action=>'files',:id=>exam %>
+            </li>
+            <% end %>
+          </ul>
+        </div>
+        </small>
+      </h1>
+      
+    </div>
+    <p>
+      <a class="btn" href="/admin/qx_merge/<%= @exam.id %>">合并文件并下载</a>
+      </p>
+    <% if @exam %>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>区县</th>
+          <th>学校</th>
+          <th>文件</th>
+          <th>状态</th>
+          <th>操作</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @schools.each do |school| %>
+        <% file = school.score_file_for(@exam) %>
+        <tr>
+          <td>
+          <%= @qx.name %>
+          </td>
+          <td>
+            <%= school.name %>
+          </td>
+
+          <td>
+            
+            <%= file.filename if file %>
+          </td>
+          <td>
+            <%= file.confirmed? ? '已确认' : '未确认' if file %>
+          </td>
+          <td>
+            <%= link_to '查看',{:controller=>'welcome',:action=>'file',:id=>file},:popup=>true if file %>
+          </td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+   <% end %>
+  </div>
+
+</div>

@@ -1,0 +1,48 @@
+<h1>Editing score_file</h1>
+
+<% form_for(@score_file) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :filename %><br />
+    <%= f.text_field :filename %>
+  </p>
+  <p>
+    <%= f.label :disk_filename %><br />
+    <%= f.text_field :disk_filename %>
+  </p>
+  <p>
+    <%= f.label :filesize %><br />
+    <%= f.text_field :filesize %>
+  </p>
+  <p>
+    <%= f.label :content_type %><br />
+    <%= f.text_field :content_type %>
+  </p>
+  <p>
+    <%= f.label :digest %><br />
+    <%= f.text_field :digest %>
+  </p>
+  <p>
+    <%= f.label :user_id %><br />
+    <%= f.text_field :user_id %>
+  </p>
+  <p>
+    <%= f.label :school_id %><br />
+    <%= f.text_field :school_id %>
+  </p>
+  <p>
+    <%= f.label :exam_id %><br />
+    <%= f.text_field :exam_id %>
+  </p>
+  <p>
+    <%= f.label :confirmed %><br />
+    <%= f.text_field :confirmed %>
+  </p>
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @score_file %> |
+<%= link_to 'Back', score_files_path %>

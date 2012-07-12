@@ -1,0 +1,28 @@
+<div class="row-fluid">
+  <div class="span3">
+    <%= render :partial=>'/admin/left'  %>
+  </div>
+  <div class="span9">
+    <div class="page-header">
+      <h1>学校管理</h1>
+    </div>
+<p>
+  <b>Code:</b>
+  <%=h @school.code %>
+</p>
+
+<p>
+  <b>Name:</b>
+  <%=h @school.name %>
+</p>
+
+<p>
+  <b>Qx:</b>
+  <%=h @school.qx_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_school_path(@school) %> |
+<%= link_to 'Back', schools_path %>
+  </div>
+</div>

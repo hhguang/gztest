@@ -1,0 +1,63 @@
+<div class="row-fluid">
+  <div class="span3">
+    <%= render :partial=>'/admin/left'  %>
+  </div>
+  <div class="span9">
+    <div class="page-header">
+      <h1>成绩文件管理</h1>
+    </div>
+
+
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>School</th>
+          <th>Filename</th>
+
+          <th>Filesize</th>
+
+
+          <th>User</th>
+          
+          <th>Exam</th>
+          <th>更新时间</th>
+          <th>操作</th>
+        </tr>
+      </thead>
+      <tbody>
+
+        <% @score_files.each do |score_file| %>
+          <tr>
+            <td><%=h score_file.school.name if score_file.school_id %></td>
+            <td><%=h score_file.filename %></td>
+
+            <td><%=h score_file.filesize %></td>
+
+
+            <td><%=h score_file.user.name if score_file.user_id %></td>
+            
+            <td><%=h score_file.exam.name if score_file.exam_id %></td>
+            <td><%= h score_file.updated_at.to_s(:db) %></td>
+            <td>
+              <% if score_file.confirmed? %>
+              <%= link_to '重传',:action=>'re_upload',:id=>score_file %>
+               
+              <% else %>
+                未确认
+              <% end %>
+              
+            </td>
+            <td> <%= link_to '下载',:action=>'download',:id=>score_file %></td>
+            <td><%= link_to '检测', score_file %></td>
+            <td><%#= link_to 'Edit', edit_score_file_path(score_file) %></td>
+            <td><%= link_to '删除', score_file, :confirm => 'Are you sure?', :method => :delete %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+    <br />
+
+    <%= link_to 'New score_file', new_score_file_path %>
+  </div>
+</div>

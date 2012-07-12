@@ -1,0 +1,79 @@
+<div class="row-fluid">
+  <div class="span3">
+    <%= render :partial=>'admin/left'  %>
+  </div><!--/span-->
+  <div class="span9 ">
+
+    <div class="page-header">
+      <h1>区学校账号管理
+      </h1>
+    </div>
+    <% if @user %>
+    <%= error_messages_for :user %>
+<% form_for :user, :url =>{:action=>'qx_pwd_save',:id=>@user},:html=>{:class=>'well form-horizontal'} do |f| -%>
+    <fieldset>
+    <legend>修改用户密码</legend>
+    <div class="control-group">
+      <label class="control-label" for="login">学校</label>
+      <div class="controls">
+        <span class="input-xlarge uneditable-input"><%= @user.school.name %></span>
+      </div>
+    </div>
+    <div class="control-group">
+      <label class="control-label" for="login">账户</label>
+      <div class="controls">
+        <span class="input-xlarge uneditable-input"><%= @user.login %></span>
+      </div>
+    </div>
+    <div class="control-group">
+      <label class="control-label" for="login">密码</label>
+      <div class="controls">
+        <%= f.password_field :password %>
+      </div>
+    </div>
+    <div class="control-group">
+      <label class="control-label" for="login">密码确认</label>
+      <div class="controls">
+        <%= f.password_field :password_confirmation %>
+      </div>
+    </div>
+
+
+    <div class="form-actions">
+            <button type="submit" class="btn btn-primary">保存</button>
+            <a class="btn" href="/admin/qx_pwd">取消</a>
+          </div>
+
+
+    </fieldset>
+<% end -%>
+    <% end %>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>用户名</th>
+          <th>姓名</th>
+          <th>学校</th>
+          <th>操作</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @users.each do |user| %>
+          <tr>
+            <td><%= user.login %></td>
+            <td><%= user.name %></td>
+            <td><%= user.school.name if user.school %></td>
+            <td>
+              <a href="/admin/qx_pwd/<%= user.id %>">修改密码</a>
+              
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+
+    </table>
+  </div>
+</div>
+
+
