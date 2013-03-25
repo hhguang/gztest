@@ -30,9 +30,9 @@
     <td><%#= link_to '显示', exam %></td>
     <td><%= link_to '修改', edit_exam_path(exam) %></td>
     <td><%= link_to '删除', exam, :confirm => 'Are you sure?', :method => :delete %></td>
-    <td><%= link_to "已上传文件[#{exam.score_files.size.to_s}]",:action=>'report',:id=>exam  %></td>
+    <td><%= link_to "已上传文件[#{exam.score_files.size.to_s}]",admin_exam_files_url(exam)  %></td>
     <td>
-      <%= link_to '合并文件并下载',:controller=>'exams',:action=>'download',:id=>exam %>
+      
     </td>
   </tr>
 <% end %>

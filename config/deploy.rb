@@ -39,10 +39,22 @@ namespace :deploy do
    task :stop do ; end
    task :restart, :roles => :app, :except => { :no_release => true } do
 #     run "#{try_sudo} touch #{File.join(current_path,'tmp','restart.txt')}"
-run "touch test.txt"
+      run "/cygdrive/d/apptool/restart-ex.bat"
    end
- end
 
+
+ end
+task :update_pro,:roles=>:app do
+  
+  run "cp -f -r #{release_path}/app /cygdrive/d/www/#{application}/"
+  run "cp -f -r #{release_path}/config /cygdrive/d/www/#{application}/"
+  run "cp -f -r #{release_path}/db /cygdrive/d/www/#{application}/"
+  run "cp -f -r #{release_path}/lib /cygdrive/d/www/#{application}/"
+  run "cp -f -r #{release_path}/public /cygdrive/d/www/#{application}/"
+  run "cp -f -r #{release_path}/script /cygdrive/d/www/#{application}/"
+  run "cp -f -r #{release_path}/vendor /cygdrive/d/www/#{application}/"
+  run "cp -f -r #{release_path}/app/views/layouts/application_deploy.rhtml /cygdrive/d/www/#{application}/app/views/layouts/application.rhtml"
+end
 #task :after_update_code, :roles => :app do
 #  run "mkdir -p /cygdrive/e/rails_apps/#{application}/"
 #  run "cp -f -r #{release_path}/app /cygdrive/e/rails_apps/#{application}/"

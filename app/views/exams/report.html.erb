@@ -49,10 +49,15 @@
             </td>
 
             <td>
+              
+
             <% file=school.score_file_for(@exam) %>
               <%= link_to file.filename,:controller=>'score_files',:action=>'download',:id=>file if file %>
 
-
+              <% files=school.score_files_for(@exam) %>
+              <% files.each do |f| %>
+              <%= link_to f.filename,:controller=>'score_files',:action=>'download',:id=>f  %>
+              <% end %>
           </td>
           <td>
             

@@ -15,6 +15,10 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resources :exams
 
+  map.namespace :admin do |admin|
+    admin.resources :exams,:has_many=>:files
+  end
+
   # The priority is based upon order of creation: first created -> highest priority.
 
   # Sample of regular route:

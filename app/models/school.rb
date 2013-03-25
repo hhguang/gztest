@@ -6,4 +6,8 @@ class School < ActiveRecord::Base
   def score_file_for(exam)
     self.score_files.find_by_exam_id(exam.id)
   end
+
+  def score_files_for(exam)
+    self.score_files.find_all_by_exam_id(exam.id)
+  end
 end

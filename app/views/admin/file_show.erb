@@ -1,0 +1,47 @@
+<% if @score_file.errors.size==0 %>
+              <span class="label label-info">文件检测结果：</span>
+              <% if @error>0 %>
+              上传的文件检测到<span class="badge badge-warning"><%= @error %></span>个错误。详情请看下面列表。
+              请更正后重新上传文件。
+              <% else %>
+              上传的文件未检测到错误，请核对下面已读入的文件数据,如无错误请点击下面的按钮确认
+                <% form_for(:score_file,:url=>{:action=>'update',:id=>@score_file},:html=>{ :multipart => true,:class=>'form-inline'} ) do |f| %>
+                  <%= f.hidden_field :confirmed,:value=>true %>
+                 <button type="submit" class="btn btn-success ">确认数据无误</button>
+                 <% end %>
+              <% end %>
+            <% end %>
+            </p>
+<table class="table">
+  <thead >
+    <tr>
+      <th>#</th>
+      <% ScoreFile::EXCELCONFIG[@f_type.to_i][:columns].each do |column| %>
+        <th>
+          <%= column['name'] %>
+        </th>
+      <% end %>
+    </tr>
+  </thead>
+  <tbody>
+    <% i=0 %>
+    <% @data.each do |row| %>
+      <% col=0 %>
+  <%# if i>=1 %>
+
+      <tr  <%= 'class="error"' if !row[:row_status] %> >
+        <td><%=  i %></td>
+        <% while col<ScoreFile::EXCELCONFIG[@f_type.to_i][:columns].size %>
+          <td>
+            <%= Iconv.conv('utf-8//IGNORE','gbk//IGNORE',row[:row][col]) %>
+            <%= '<span class="label label-warning">错误</span>' if ! row[:col_status][col] %>
+            <% col+=1 %>
+          </td>
+        <% end %>
+      </tr>
+  <%# end %>
+      <% i+=1 %>
+    <% end %>
+
+  </tbody>
+</table>

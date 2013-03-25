@@ -11,7 +11,7 @@ class WelcomeController < ApplicationController
     
     end
     end
-    #@exam=Exam.actives
+    #todo:@exams=Exam.actives //需要取出所有开启的考试，并将考试ID传递给SCORES_CONTROLLER
   end
 
   def show

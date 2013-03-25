@@ -1,0 +1,158 @@
+<div class="row-fluid">
+  <div class="span3">
+    <%= render :partial=>'/admin/left'  %>
+  </div>
+  <div class="span9">
+    <div class="page-header">
+      <h1>成绩文件
+        <small>
+          <%= @exam.name %>
+          <div class="btn-group pull-right">
+            <button data-toggle="dropdown" class="btn btn-info dropdown-toggle">选择其他考试： <span class="caret"></span></button>
+            <ul class="dropdown-menu">
+              <% Exam.all.each do |exam| %>
+                <li>
+                  <%= link_to exam.name,admin_exam_files_url(exam) %>
+                </li>
+              <% end %>
+            </ul>
+          </div>
+        </small>
+      </h1>
+
+    </div>
+        <div class="btn-group">
+    <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+   合并文件并下载
+    <span class="caret"></span>
+    </a>
+    <ul class="dropdown-menu">
+      <li>
+      <a href="/admin/qx_file/<%= @exam.id %>?f_type=0">高一</a>
+      </li>
+      <li>
+      <a href="/admin/qx_file/<%= @exam.id %>?f_type=1">高二理科</a>
+      </li>
+      <li>
+      <a href="/admin/qx_file/<%= @exam.id %>?f_type=2">高二文科</a>
+      </li>
+      <li>
+      <a href="/admin/qx_file/<%= @exam.id %>?f_type=3">高三理科</a>
+      </li>
+      <li>
+      <a href="/admin/qx_file/<%= @exam.id %>?f_type=4">高三文科</a>
+      </li>
+    <!-- dropdown menu links -->
+    </ul>
+          
+    </div>
+    <div>
+    <span class="label label-info">注意：未确认文件无法合并</span>
+    </div>
+    <% if @exam %>
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            
+            <th>学校</th>
+            <th>文件</th>
+            
+            <th colspan=2 >操作</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% @schools.each do |school| %>
+            <% files = school.score_files_for(@exam) %>
+            <% first=true %>
+            
+            <tr>
+              <% if first %>
+              <td rowspan="<%= files.size+1 %>">
+                <%= school.name %>
+              </td>
+              <% first=false %>
+              <% end %>
+            </tr>
+            <% files.each do |file| %>
+            <tr>
+              <td>                
+
+                  <%#= file.filename  %>
+                  <%#= ScoreFile::EXCELCONFIG[file.f_type][:name] if file.f_type %>
+                  <a href="#" onclick="$('#myModal<%= file.id %>').modal({remote:'<%= admin_exam_file_path(@exam,file.id) %>'})">
+                    <%= ScoreFile::EXCELCONFIG[file.f_type][:name] if file.f_type %>
+                  </a>
+                (<%= file.confirmed? ? '已确认' : '未确认' if file %>)                | 
+
+
+                  <div id="myModal<%= file.id %>" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="width:760px;">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                      <h3 id="myModalLabel">
+                        <%= ScoreFile::EXCELCONFIG[file.f_type][:name] if file.f_type %>
+                        [文件名： <%= file.filename  %>]
+                      </h3>
+                    </div>
+                    <div class="modal-body">
+                      <p>读取中…</p>
+                    </div>
+                    <div class="modal-footer">
+                      <button class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>
+                      <a class="btn btn-primary" href="/score_files/download/<%= file.id %>">下载文件</a>
+                    </div>
+                  </div>
+
+                
+              </td>
+              
+              <td >
+                
+                  <% if file.confirmed? %>
+                    <% form_for(:score_file,:url=>admin_exam_file_url(@exam,file.id),:html=>{ :method=>'put',:class=>'form-inline'} ) do |f| %>
+                      <%= f.hidden_field :confirmed,:value=>false %>
+                     <button type="submit" class="btn btn-success ">取消确认</button>
+                     <% end %>
+
+                  <% else %>
+                  <a href="#" onclick="$('#myModal<%= file.id %>').modal({remote:'<%= admin_exam_file_url(@exam,file.id) %>'})">
+                    确认    
+                  </a>
+                  <% end %>
+                   
+                  
+                
+              </td>
+              <td>                
+                <%= link_to '下载',admin_exam_file_url(@exam,file.id,:format=>'csv')  %>
+              </td>
+            </tr>
+            <% end %>
+          <% end %>
+        </tbody>
+      </table>
+
+    <% end %>
+  </div>
+
+</div>
+
+<div id="files" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="width:760px;">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="myModalLabel">
+      合并文件
+    </h3>
+  </div>
+  <div class="modal-body">
+    未确认的文件可能含有错误，不能合并。
+    <label class="checkbox">
+<input type="checkbox" value=""/>
+Option one is this and that—be sure to include why it's great
+</label>
+  </div>
+  <div class="modal-footer">
+    <button class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>
+    <a class="btn btn-primary" href="">下载文件</a>
+  </div>
+</div>
