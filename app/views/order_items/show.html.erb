@@ -1,0 +1,18 @@
+<p>
+  <b>Order:</b>
+  <%=h @order_item.order_id %>
+</p>
+
+<p>
+  <b>School:</b>
+  <%=h @order_item.school_id %>
+</p>
+
+<p>
+  <b>School name:</b>
+  <%=h @order_item.school_name %>
+</p>
+
+
+<%= link_to 'Edit', edit_order_item_path(@order_item) %> |
+<%= link_to 'Back', order_items_path %>
