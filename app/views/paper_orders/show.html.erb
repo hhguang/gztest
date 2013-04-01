@@ -1,0 +1,13 @@
+<p>
+  <b>Name:</b>
+  <%=h @paper_order.name %>
+</p>
+
+<p>
+  <b>Item type:</b>
+  <%=h @paper_order.item_type %>
+</p>
+
+
+<%= link_to 'Edit', edit_paper_order_path(@paper_order) %> |
+<%= link_to 'Back', paper_orders_path %>

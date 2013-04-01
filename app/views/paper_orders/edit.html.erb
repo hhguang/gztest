@@ -1,0 +1,20 @@
+<h1>Editing paper_order</h1>
+
+<% form_for(@paper_order) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </p>
+  <p>
+    <%= f.label :item_type %><br />
+    <%= f.text_field :item_type %>
+  </p>
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @paper_order %> |
+<%= link_to 'Back', paper_orders_path %>
