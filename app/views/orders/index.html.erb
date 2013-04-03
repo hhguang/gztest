@@ -1,0 +1,86 @@
+
+<% if @order_item.new_record? %>
+<div>
+  <span><%= @school.name %>订单</span>
+<% form_for(@order_item,:html=>{:class=>'form-horizontal'}) do |f| %>
+  <%= f.error_messages %>
+
+  <span>高一</span>
+  <div class="control-group">
+<label class="control-label" for="inputEmail">语文</label>
+<div class="controls">
+<input type="text" id="inputEmail" placeholder="Email">
+</div>
+</div>
+  <div class="control-group">
+<label class="control-label" for="inputEmail">数学</label>
+<div class="controls">
+<input type="text" id="inputEmail" placeholder="Email">
+</div>
+</div>
+  <div class="control-group">
+<label class="control-label" for="inputEmail">英语</label>
+<div class="controls">
+<input type="text" id="inputEmail" placeholder="Email">
+</div>
+</div>
+  <div class="control-group">
+<label class="control-label" for="inputEmail">物理</label>
+<div class="controls">
+<input type="text" id="inputEmail" placeholder="Email">
+</div>
+</div>
+  <div class="control-group">
+<label class="control-label" for="inputEmail">化学</label>
+<div class="controls">
+<input type="text" id="inputEmail" placeholder="Email">
+</div>
+</div>
+  <div class="control-group">
+<label class="control-label" for="inputEmail">生物</label>
+<div class="controls">
+<input type="text" id="inputEmail" placeholder="Email">
+</div>
+</div>
+<div class="control-group">
+<label class="control-label" for="inputEmail">政治</label>
+<div class="controls">
+<input type="text" id="inputEmail" placeholder="Email">
+</div>
+</div>
+  <div class="control-group">
+<label class="control-label" for="inputEmail">历史</label>
+<div class="controls">
+<input type="text" id="inputEmail" placeholder="Email">
+</div>
+</div>
+  <div class="control-group">
+<label class="control-label" for="inputEmail">地理</label>
+<div class="controls">
+<input type="text" id="inputEmail" placeholder="Email">
+</div>
+</div>
+  <span>
+    高二
+  </span>
+
+<div class="control-group">
+<label class="control-label" for="inputEmail">文科</label>
+<div class="controls">
+<input type="text" id="inputEmail" placeholder="Email">
+</div>
+</div>
+  <div class="control-group">
+<label class="control-label" for="inputEmail">理科</label>
+<div class="controls">
+<input type="text" id="inputEmail" placeholder="Email">
+</div>
+</div>
+      <div class="form-actions">
+    <button type="submit" class="btn btn-primary">提交订单</button>
+    <button type="button" class="btn">取消</button>
+    </div>
+<% end %>
+</div>
+<% else %>
+<% end %>

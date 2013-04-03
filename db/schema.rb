@@ -19,7 +19,7 @@ ActiveRecord::Schema.define(:version => 20130328034707) do
   end
 
   create_table "order_items", :force => true do |t|
-    t.integer  "order_id"
+    t.integer  "paper_order_id"
     t.integer  "school_id"
     t.string   "school_name"
     t.integer  "g1yw"
@@ -54,6 +54,7 @@ ActiveRecord::Schema.define(:version => 20130328034707) do
   create_table "paper_orders", :force => true do |t|
     t.string   "name"
     t.integer  "item_type"
+    t.boolean  "current"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
