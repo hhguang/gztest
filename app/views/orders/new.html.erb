@@ -1,0 +1,87 @@
+
+<% if @order_item.new_record? %>
+<div>
+  <span><%= @school.name %>订单</span>
+<% form_for(:order_item,:url=>orders_path,:html=>{:class=>'form-horizontal'}) do |f| %>
+  <%= f.error_messages %>
+  <%= f.hidden_field :paper_order_id,:value=>@paper_order.id %>
+  <%= f.hidden_field :school_id,:value=>@school.id %>
+  <span>高一</span>
+  <div class="control-group">
+<label class="control-label" for="inputEmail">语文</label>
+<div class="controls">
+<input type="text" id="inputEmail" placeholder="试卷份数">
+</div>
+</div>
+  <div class="control-group">
+<label class="control-label" for="inputEmail">数学</label>
+<div class="controls">
+<input type="text" id="inputEmail" placeholder="试卷份数">
+</div>
+</div>
+  <div class="control-group">
+<label class="control-label" for="inputEmail">英语</label>
+<div class="controls">
+<input type="text" id="inputEmail" placeholder="试卷份数">
+</div>
+</div>
+  <div class="control-group">
+<label class="control-label" for="inputEmail">物理</label>
+<div class="controls">
+<input type="text" id="inputEmail" placeholder="试卷份数">
+</div>
+</div>
+  <div class="control-group">
+<label class="control-label" for="inputEmail">化学</label>
+<div class="controls">
+<input type="text" id="inputEmail" placeholder="试卷份数">
+</div>
+</div>
+  <div class="control-group">
+<label class="control-label" for="inputEmail">生物</label>
+<div class="controls">
+<input type="text" id="inputEmail" placeholder="试卷份数">
+</div>
+</div>
+<div class="control-group">
+<label class="control-label" for="inputEmail">政治</label>
+<div class="controls">
+<input type="text" id="inputEmail" placeholder="试卷份数">
+</div>
+</div>
+  <div class="control-group">
+<label class="control-label" for="inputEmail">历史</label>
+<div class="controls">
+<input type="text" id="inputEmail" placeholder="试卷份数">
+</div>
+</div>
+  <div class="control-group">
+<label class="control-label" for="inputEmail">地理</label>
+<div class="controls">
+<input type="text" id="inputEmail" placeholder="试卷份数">
+</div>
+</div>
+  <span>
+    高二
+  </span>
+
+<div class="control-group">
+<label class="control-label" for="inputEmail">文科</label>
+<div class="controls">
+<input type="text" id="inputEmail" placeholder="人数">
+</div>
+</div>
+  <div class="control-group">
+<label class="control-label" for="inputEmail">理科</label>
+<div class="controls">
+<input type="text" id="inputEmail" placeholder="人数">
+</div>
+</div>
+      <div class="form-actions">
+    <button type="submit" class="btn btn-primary">提交订单</button>
+    <button type="button" class="btn">取消</button>
+    </div>
+<% end %>
+</div>
+<% else %>
+<% end %>

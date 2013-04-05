@@ -1,6 +1,12 @@
 class OrdersController < ApplicationController
   def index
     @school=current_user.school
+    @paper_orders=PaperOrder.all
+#    @order_items=@school.order_items
+  end
+
+  def new
+    @school=current_user.school
     @paper_order=PaperOrder.find_by_current(1)
     @order_item=@paper_order.order_items.find_by_school_id(@school.id) || @paper_order.order_items.build(:school_id=>@school.id)
   end
@@ -19,7 +25,7 @@ class OrdersController < ApplicationController
 
     respond_to do |format|
       if @order_item.save
-        format.html { redirect_to(@order_item, :notice => 'OrderItem was successfully created.') }
+        format.html { redirect_to(:action=>'index', :notice => '订单已成功提交.') }
         format.xml  { render :xml => @order_item, :status => :created, :location => @order_item }
       else
         format.html { render :action => "new" }
