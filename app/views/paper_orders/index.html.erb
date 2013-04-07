@@ -1,22 +1,37 @@
-<h1>Listing paper_orders</h1>
+<div class="row-fluid">
+  <div class="span3">
+    <%= render :partial=>'/admin/left'  %>
+  </div>
+  <div class="span9">
+   <div class="page-header">
+      <h1>试卷订单管理</h1>
+    </div>
+    <div style="padding: 10px;"  class="btn-group">
+      <a class="btn" href="/paper_orders">全部</a>
+      <a class="btn" href="/paper_orders/new">发布</a>
+    </div>
 
-<table>
+<table class="table table-bordered">
   <tr>
-    <th>Name</th>
-    <th>Item type</th>
+    <th>名称</th>
+    <th>类型</th>
+    <th>已提交的订单</th>
+    <th>操作</th>
   </tr>
 
 <% @paper_orders.each do |paper_order| %>
   <tr>
     <td><%=h paper_order.name %></td>
     <td><%=h paper_order.item_type %></td>
+    <td>
+      <%= link_to paper_order.order_items.size,paper_order_order_items_path(paper_order) %>
+    </td>
     <td><%= link_to 'Show', paper_order %></td>
-    <td><%= link_to 'Edit', edit_paper_order_path(paper_order) %></td>
-    <td><%= link_to 'Destroy', paper_order, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%= link_to '编辑', edit_paper_order_path(paper_order) %></td>
+    <td><%= link_to '删除', paper_order, :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
 <% end %>
 </table>
 
-<br />
-
-<%= link_to 'New paper_order', new_paper_order_path %>
+  </div>
+</div>

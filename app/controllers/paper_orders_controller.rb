@@ -1,4 +1,5 @@
 class PaperOrdersController < ApplicationController
+  before_filter :login_required,:require_admin
   # GET /paper_orders
   # GET /paper_orders.xml
   def index

@@ -8,7 +8,7 @@ class OrdersController < ApplicationController
   def new
     @school=current_user.school
     @paper_order=PaperOrder.find_by_current(1)
-    @order_item=@paper_order.order_items.find_by_school_id(@school.id) || @paper_order.order_items.build(:school_id=>@school.id)
+    @order_item=@paper_order.order_items.build(:school_id=>@school.id)
   end
 
   def show
@@ -22,7 +22,8 @@ class OrdersController < ApplicationController
 
   def create
     @order_item = OrderItem.new(params[:order_item])
-
+    @school=current_user.school
+    @paper_order=PaperOrder.find_by_current(1)
     respond_to do |format|
       if @order_item.save
         format.html { redirect_to(:action=>'index', :notice => '订单已成功提交.') }

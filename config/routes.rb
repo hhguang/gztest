@@ -1,5 +1,8 @@
 ActionController::Routing::Routes.draw do |map|
-  map.resources :paper_orders
+  map.resources :paper_orders do |paper_order|
+    paper_order.resources :order_items
+  end
+
 
   map.resources :order_items
 

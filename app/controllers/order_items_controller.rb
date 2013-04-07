@@ -1,8 +1,10 @@
 class OrderItemsController < ApplicationController
+  before_filter :login_required,:require_admin
+  before_filter :find_paper_order
   # GET /order_items
   # GET /order_items.xml
   def index
-    @order_items = OrderItem.all
+    @order_items = @paper_order.order_items
 
     respond_to do |format|
       format.html # index.html.erb
@@ -76,8 +78,14 @@ class OrderItemsController < ApplicationController
     @order_item.destroy
 
     respond_to do |format|
-      format.html { redirect_to(order_items_url) }
+      format.html { redirect_to(paper_order_order_items_url) }
       format.xml  { head :ok }
     end
+  end
+
+  protected
+
+  def find_paper_order
+    @paper_order=PaperOrder.find(params[:paper_order_id])
   end
 end

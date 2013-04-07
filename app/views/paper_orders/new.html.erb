@@ -1,19 +1,35 @@
-<h1>New paper_order</h1>
+<div class="row-fluid">
+  <div class="span3">
+    <%= render :partial=>'/admin/left'  %>
+  </div>
+  <div class="span9">
+   <div class="page-header">
+      <h1>试卷订单管理</h1>
+    </div>
+    <div style="padding: 10px;"  class="btn-group">
+      <a class="btn" href="/paper_orders">全部</a>
+      <a class="btn" href="/paper_orders/new">发布</a>
+    </div>
+
+
 
 <% form_for(@paper_order) do |f| %>
   <%= f.error_messages %>
 
   <p>
-    <%= f.label :name %><br />
+    <label>名称</label><br />
     <%= f.text_field :name %>
   </p>
   <p>
-    <%= f.label :item_type %><br />
+    <label>类型</label><br />
     <%= f.text_field :item_type %>
   </p>
   <p>
-    <%= f.submit 'Create' %>
+    <%= f.submit '发布' %>
   </p>
 <% end %>
 
 <%= link_to 'Back', paper_orders_path %>
+
+  </div>
+</div>
