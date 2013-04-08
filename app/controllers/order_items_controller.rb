@@ -5,7 +5,7 @@ class OrderItemsController < ApplicationController
   # GET /order_items.xml
   def index
     @order_items = @paper_order.order_items
-
+    @unorders=School.all-@order_items.collect{|i| i.school }
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @order_items }

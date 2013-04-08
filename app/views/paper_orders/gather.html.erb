@@ -1,0 +1,438 @@
+<div class="row-fluid">
+  <%#*<div class="span3">%>
+    <%#= render :partial=>'/admin/left'  %>
+  <%#*</div>%>
+  <div class="span12">
+    <div class="page-header">
+      <h1>试卷订单管理</h1>
+    </div>
+    <div style="padding: 10px;"  class="btn-group">
+      <a class="btn" href="/paper_orders">全部</a>
+      <a class="btn" href="/paper_orders/new">发布</a>
+    </div>
+
+    <div style="padding: 10px;">
+      <%= link_to @paper_order.name,paper_order_order_items_url(@paper_order) %>
+    </div>
+
+    <ul class="nav nav-tabs" id="myTab">
+      <li class="active"><a href="#home" data-toggle="tab">各校订数</a></li>
+      <li>
+        <a href="#profile" data-toggle="tab">高一袋数
+        </a>
+      </li>
+      <li>
+        <a href="#profile" data-toggle="tab">高二袋数
+        </a>
+      </li>
+    </ul>
+
+    <div class="tab-content">
+      <div class="tab-pane active" id="home">
+        <table class="table table-bordered">
+          <tr>
+
+            <th rowspan="2" >区</th>
+            <th rowspan="2" >学校</th>
+            <th colspan="9">高一</th>
+            <th colspan="10">高二</th>
+          </tr>
+          <tr>
+            <th>语文</th>
+            <th>数学</th>
+            <th>英语</th>
+            <th>物理</th>
+            <th>化学</th>
+            <th>生物</th>
+            <th>政治</th>
+            <th>历史</th>
+            <th>地理</th>
+
+            <th>语文</th>
+            <th>文科数学</th>
+            <th>理科数学</th>
+            <th>英语</th>
+            <th>物理</th>
+            <th>化学</th>
+            <th>生物</th>
+            <th>政治</th>
+            <th>历史</th>
+            <th>地理</th>
+          </tr>
+
+         <% @qxes.each do |qx| %>
+          <% qx.schools.each do |school| %>
+          
+          <tr>
+            <td>
+              <%= qx.name %>
+            </td>
+            <td>
+              <%= school.name %>
+            </td>
+            <td>
+              <%= @orders_groups[school.id].g1yw || 0  %>
+            </td>
+            <td>
+              <%= @orders_groups[school.id].g1sx || 0 %>
+            </td>
+            <td>
+              <%= @orders_groups[school.id].g1yy || 0 %>
+            </td>
+            <td>
+              <%= @orders_groups[school.id].g1wl || 0 %>
+            </td>
+            <td>
+              <%= @orders_groups[school.id].g1hx || 0 %>
+            </td>
+            <td>
+              <%= @orders_groups[school.id].g1sw || 0 %>
+            </td>
+            <td>
+              <%= @orders_groups[school.id].g1zz || 0 %>
+            </td>
+            <td>
+              <%= @orders_groups[school.id].g1ls || 0 %>
+            </td>
+            <td>
+              <%= @orders_groups[school.id].g1dl || 0 %>
+            </td>
+            <td>
+              <%= @orders_groups[school.id].g2yw || 0 %>
+            </td>
+            <td>
+              <%= @orders_groups[school.id].g2sxw || 0 %>
+            </td>
+            <td>
+              <%= @orders_groups[school.id].g2sxl || 0 %>
+            </td>
+            <td>
+              <%= @orders_groups[school.id].g2yy || 0 %>
+            </td>
+            <td>
+              <%= @orders_groups[school.id].g2wl || 0 %>
+            </td>
+            <td>
+              <%= @orders_groups[school.id].g2hx || 0 %>
+            </td>
+            <td>
+              <%= @orders_groups[school.id].g2sw || 0 %>
+            </td>
+            <td>
+              <%= @orders_groups[school.id].g2zz || 0 %>
+            </td>
+            <td>
+              <%= @orders_groups[school.id].g2ls || 0 %>
+            </td>
+            <td>
+              <%= @orders_groups[school.id].g2dl || 0 %>
+            </td>
+          </tr>
+          <% end %>
+          <tr class="success">
+            <td>
+              <%= qx.name %>合计
+            </td>
+            <td></td>
+            <td>
+              <%= @orders_qx[qx.id].sum{ |v| v.g1yw} %>
+            </td>
+            <td>
+              <%= @orders_qx[qx.id].sum{ |v| v.g1sx} %>
+            </td>
+            <td>
+              <%= @orders_qx[qx.id].sum{ |v| v.g1yy} %>
+            </td>
+            <td>
+              <%= @orders_qx[qx.id].sum{ |v| v.g1wl} %>
+            </td>
+            <td>
+              <%= @orders_qx[qx.id].sum{ |v| v.g1hx} %>
+            </td>
+            <td>
+              <%= @orders_qx[qx.id].sum{ |v| v.g1sw} %>
+            </td>
+            <td>
+              <%= @orders_qx[qx.id].sum{ |v| v.g1zz} %>
+            </td>
+            <td>
+             <%= @orders_qx[qx.id].sum{ |v| v.g1ls} %>
+            </td>
+            <td>
+              <%= @orders_qx[qx.id].sum{ |v| v.g1dl} %>
+            </td>
+            <td>
+              <%= @orders_qx[qx.id].sum{ |v| v.g2yw} %>
+            </td>
+            <td>
+              <%= @orders_qx[qx.id].sum{ |v| v.g2sxw} %>
+            </td>
+            <td>
+              <%= @orders_qx[qx.id].sum{ |v| v.g2sxl} %>
+            </td>
+            <td>
+              <%= @orders_qx[qx.id].sum{ |v| v.g1yy} %>
+            </td>
+            <td>
+              <%= @orders_qx[qx.id].sum{ |v| v.g2wl} %>
+            </td>
+            <td>
+              <%= @orders_qx[qx.id].sum{ |v| v.g2hx} %>
+            </td>
+            <td>
+              <%= @orders_qx[qx.id].sum{ |v| v.g2sw} %>
+            </td>
+            <td>
+              <%= @orders_qx[qx.id].sum{ |v| v.g2zz} %>
+            </td>
+            <td>
+              <%= @orders_qx[qx.id].sum{ |v| v.g2ls} %>
+            </td>
+            <td>
+              <%= @orders_qx[qx.id].sum{ |v| v.g2dl} %>
+            </td>
+            
+          </tr>
+          <% end %>
+          <tr class="error">
+            <td>
+              全市总计
+            </td>
+            <td></td>
+            <td>
+              <%= @order_items.to_a.sum{ |v| v.g1yw} %>
+            </td>
+            <td>
+              <%= @order_items.to_a.sum {|v| v.g1yy} %>
+            </td>
+            <td>
+              <%= @order_items.to_a.sum {|v| v.g1sx} %>
+            </td>
+            <td>
+              <%= @order_items.to_a.sum {|v| v.g1wl} %>
+            </td>
+            <td>
+              <%= @order_items.to_a.sum {|v| v.g1hx} %>
+            </td>
+            <td>
+              <%= @order_items.to_a.sum {|v| v.g1sw} %>
+            </td>
+            <td>
+              <%= @order_items.to_a.sum {|v| v.g1zz} %>
+            </td>
+            <td>
+              <%= @order_items.to_a.sum {|v| v.g1ls} %>
+            </td>
+            <td>
+              <%= @order_items.to_a.sum {|v| v.g1dl} %>
+            </td>
+            <td>
+              <%= @order_items.to_a.sum {|v| v.g2yw} %>
+            </td>
+            <td>
+              <%= @order_items.to_a.sum {|v| v.g2sxw} %>
+            </td>
+            <td>
+              <%= @order_items.to_a.sum {|v| v.g2sxl} %>
+            </td>
+            <td>
+              <%= @order_items.to_a.sum {|v| v.g2yy} %>
+            </td>
+            <td>
+              <%= @order_items.to_a.sum {|v| v.g2wl} %>
+            </td>
+            <td>
+              <%= @order_items.to_a.sum {|v| v.g2hx} %>
+            </td>
+            <td>
+              <%= @order_items.to_a.sum {|v| v.g2sw} %>
+            </td>
+            <td>
+              <%= @order_items.to_a.sum {|v| v.g2zz} %>
+            </td>
+            <td>
+              <%= @order_items.to_a.sum {|v| v.g2ls} %>
+            </td>
+            <td>
+              <%= @order_items.to_a.sum {|v| v.g2dl} %>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="tab-pane" id="profile">
+        <table class="table table-bordered">
+          <tr>
+
+            <th rowspan="2" >区</th>
+            <th rowspan="2" >学校</th>
+            <th colspan="3">语文</th>
+            <th colspan="3">数学</th>
+            <th colspan="3">英语</th>
+            <th colspan="3">物理</th>
+            <th colspan="3">化学</th>
+            <th colspan="3">生物</th>
+            <th colspan="3">政治</th>
+            <th colspan="3">历史</th>
+            <th colspan="3">地理</th>
+          </tr>
+          <tr>
+            <th>数量</th>
+            <th>大袋</th>
+            <th>小袋</th>
+
+            <th>数量</th>
+            <th>大袋</th>
+            <th>小袋</th>
+
+            <th>数量</th>
+            <th>大袋</th>
+            <th>小袋</th>
+
+            <th>数量</th>
+            <th>大袋</th>
+            <th>小袋</th>
+
+            <th>数量</th>
+            <th>大袋</th>
+            <th>小袋</th>
+
+            <th>数量</th>
+            <th>大袋</th>
+            <th>小袋</th>
+
+            <th>数量</th>
+            <th>大袋</th>
+            <th>小袋</th>
+
+            <th>数量</th>
+            <th>大袋</th>
+            <th>小袋</th>
+
+            <th>数量</th>
+            <th>大袋</th>
+            <th>小袋</th>
+          </tr>
+
+         <% @qxes.each do |qx| %>
+          <% qx.schools.each do |school| %>
+          
+          <tr>
+            <td>
+              <%= qx.name %>
+            </td>
+            <td>
+              <%= school.name %>
+            </td>
+            <td>
+              <%= @orders_groups[school.id].g1yw || 0 %>
+            </td>
+            <td>
+              <%= bigbag(@orders_groups[school.id].g1yw) %>
+            </td>
+            <td>
+              <%= smallbag(@orders_groups[school.id].g1yw) %>
+            </td>
+            
+            <td>
+              <%= @orders_groups[school.id].g1sx || 0 %>
+            </td>
+            <td>
+              <%= bigbag(@orders_groups[school.id].g1sx) %>
+            </td>
+            <td>
+              <%= smallbag(@orders_groups[school.id].g1sx) %>
+            </td>
+            <td>
+              <%= @orders_groups[school.id].g1yy || 0 %>
+            </td>
+            <td>
+              <%= bigbag(@orders_groups[school.id].g1yy) %>
+            </td>
+            <td>
+              <%= smallbag(@orders_groups[school.id].g1yy) %>
+            </td>
+            <td>
+              <%= @orders_groups[school.id].g1wl || 0 %>
+            </td>
+            <td>
+              <%= bigbag(@orders_groups[school.id].g1wl) %>
+            </td>
+            <td>
+              <%= smallbag(@orders_groups[school.id].g1wl) %>
+            </td>
+            <td>
+              <%= @orders_groups[school.id].g1hx || 0 %>
+            </td>
+            <td>
+              <%= bigbag(@orders_groups[school.id].g1hx) %>
+            </td>
+            <td>
+              <%= smallbag(@orders_groups[school.id].g1hx) %>
+            </td>
+            <td>
+              <%= @orders_groups[school.id].g1sw || 0  %>
+            </td>
+            <td>
+              <%= bigbag(@orders_groups[school.id].g1sw) %>
+            </td>
+            <td>
+              <%= smallbag(@orders_groups[school.id].g1sw) %>
+            </td>
+            <td>
+              <%= @orders_groups[school.id].g1zz || 0 %>
+            </td>
+            <td>
+              <%= bigbag(@orders_groups[school.id].g1zz) %>
+            </td>
+            <td>
+              <%= smallbag(@orders_groups[school.id].g1zz) %>
+            </td>
+            <td>
+              <%= @orders_groups[school.id].g1ls || 0 %>
+            </td>
+            <td>
+              <%= bigbag(@orders_groups[school.id].g1ls) %>
+            </td>
+            <td>
+              <%= smallbag(@orders_groups[school.id].g1ls) %>
+            </td>
+            <td>
+              <%= @orders_groups[school.id].g1dl || 0 %>
+            </td>
+            <td>
+              <%= bigbag(@orders_groups[school.id].g1dl) %>
+            </td>
+            <td>
+              <%= smallbag(@orders_groups[school.id].g1dl) %>
+            </td>
+
+          </tr>
+          <% end %>
+          <tr class="success">
+            <td>
+              <%= qx.name %>合计
+            </td>
+            <td></td>
+            
+
+          </tr>
+          <% end %>
+          <tr class="error">
+            <td>
+              全市总计
+            </td>
+            <td></td>
+            
+            
+          </tr>
+        </table>
+
+      </div>
+
+    </div>
+
+
+
+
+  </div>
+</div>

@@ -26,7 +26,8 @@ class OrdersController < ApplicationController
     @paper_order=PaperOrder.find_by_current(1)
     respond_to do |format|
       if @order_item.save
-        format.html { redirect_to(:action=>'index', :notice => '订单已成功提交.') }
+        flash[:notice]= '订单已成功提交.'
+        format.html { redirect_to(:action=>'show',:id=>@order_item) }
         format.xml  { render :xml => @order_item, :status => :created, :location => @order_item }
       else
         format.html { render :action => "new" }

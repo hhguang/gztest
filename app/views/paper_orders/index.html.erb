@@ -26,7 +26,7 @@
     <td>
       <%= link_to paper_order.order_items.size,paper_order_order_items_path(paper_order) %>
     </td>
-    <td><%= link_to 'Show', paper_order %></td>
+    <td><%= link_to '查看', paper_order_order_items_path(paper_order) %></td>
     <td><%= link_to '编辑', edit_paper_order_path(paper_order) %></td>
     <td><%= link_to '删除', paper_order, :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>

@@ -45,7 +45,7 @@ class PaperOrdersController < ApplicationController
 
     respond_to do |format|
       if @paper_order.save
-        format.html { redirect_to(@paper_order, :notice => 'PaperOrder was successfully created.') }
+        format.html { redirect_to(paper_orders_url) }
         format.xml  { render :xml => @paper_order, :status => :created, :location => @paper_order }
       else
         format.html { render :action => "new" }
@@ -61,7 +61,7 @@ class PaperOrdersController < ApplicationController
 
     respond_to do |format|
       if @paper_order.update_attributes(params[:paper_order])
-        format.html { redirect_to(@paper_order, :notice => 'PaperOrder was successfully updated.') }
+        format.html { redirect_to(paper_orders_url) }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
@@ -80,5 +80,23 @@ class PaperOrdersController < ApplicationController
       format.html { redirect_to(paper_orders_url) }
       format.xml  { head :ok }
     end
+  end
+
+  def gather
+    @paper_order = PaperOrder.find(params[:id])
+    @order_items=@paper_order.order_items.to_a
+    @unorders=School.all-@order_items.collect{|i| i.school }
+    @unorders.each do |school|
+      @order_items<<@paper_order.order_items.build(:school_id=>school.id,
+        :school_name=>school.name,
+        :g1yw=>0,:g1sx=>0,:g1yy=>0,:g1wl=>0,:g1hx=>0,:g1sw=>0,:g1zz=>0,:g1ls=>0,:g1dl=>0,
+        :g2yw=>0,:g2sxw=>0,:g2sxl=>0,:g2yy=>0,:g2wl=>0,:g2hx=>0,:g2sw=>0,:g2zz=>0,:g2ls=>0,:g2dl=>0,
+        :g3yw=>0,:g3sxw=>0,:g3sxl=>0,:g3yy=>0,:g3wz=>0,:g3lz=>0,:g2w=>0,:g2l=>0,:g3w=>0,:g3l=>0
+      )
+
+    end
+    @qxes=Qx.all 
+    @orders_groups=@order_items.index_by{|item| item.school_id }
+    @orders_qx=@order_items.group_by{ |item| item.school.qx_id }
   end
 end
