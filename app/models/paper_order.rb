@@ -1,5 +1,5 @@
 class PaperOrder < ActiveRecord::Base
-  has_many :order_items
+  has_many :order_items ,:dependent=>:destroy
 
   def gather
     gather={:qxes=>[],s=>{}}

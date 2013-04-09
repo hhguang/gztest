@@ -7,7 +7,7 @@ class OrdersController < ApplicationController
 
   def new
     @school=current_user.school
-    @paper_order=PaperOrder.find_by_current(1)
+    @paper_order=PaperOrder.find(params[:paper_order_id])
     @order_item=@paper_order.order_items.build(:school_id=>@school.id)
   end
 

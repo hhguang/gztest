@@ -8,7 +8,7 @@
       <% if order=@school.order_items.find_by_paper_order_id(paper_order.id) %>
       <%= link_to "查看订单",order_path(order)  %>
       <% else %>
-      <%= link_to "新建订单",new_order_path %>
+      <%= link_to "新建订单",:action=>'new',:paper_order_id=>paper_order %>
       <% end %>
     </li>
 
