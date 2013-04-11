@@ -1,6 +1,27 @@
+<% if @order_item.confirmed?  %>
 <div>
+  <div class="alert alert-block">
+  <button type="button" class="close" data-dismiss="alert">&times;</button>
+  <h4>注意!</h4>
+  您的订单已确认，请打印纸质订单并在打印的纸质订单上加盖学校印章，区属学校上报所属区（县）教育局教研室，市直学校上报市教育局教研室。
+</div>
   <a href="#" onclick="pr();"  >打印</a>
 </div>
+<% else %>
+<div class="alert alert-danger alert-block">
+  <button type="button" class="close" data-dismiss="alert">&times;</button>
+  <h4>注意!</h4>
+  一旦点选“打印”，即视学校确认试卷订单，将不能修改试卷订数并直接打印纸质订单。请在打印的纸质订单上加盖学校印章，区属学校上报所属区（县）教育局教研室，市直学校上报市教育局教研室。
+</div>
+    
+      <% form_for(:order_item,:url=>{:action=>"update",:id=>@order_item}) do |f| %>
+      <%= f.hidden_field :confirmed,:value=>true %>
+      <button class="btn" type="submit">确认并进入打印页面</button>
+      <%= link_to "修改订单",:action=>"edit",:id=>@order_item %>
+      <% end %>
+
+    
+<% end %>
 <!--startprint1-->
 <div class="" id="print">
   
@@ -81,9 +102,7 @@
     </td>
   </tr>
 </table>
-<p style="padding-top: 15px;padding-bottom: 15px;">
-  　注：试卷袋数应按实际学生数除以30，包装时每袋32或16份。
-</p>
+<div style="padding: 10px;">
 <table width="90%">
   <tr>
     <td width="40%">
@@ -97,7 +116,7 @@
     </td>
   </tr>
 </table>
-
+</div>
 </div>
 <!--startprint1-->
 <script>

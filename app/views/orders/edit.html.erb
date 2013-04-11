@@ -1,64 +1,71 @@
-
-<% if @order_item.new_record? %>
 <div>
   <h4><%= @school.name %>订单</h4>
-<% form_for(:order_item,:url=>{:action=>'create'},:html=>{:class=>'form-horizontal'}) do |f| %>
+  <% form_for(:order_item,:url=>{:action=>'update',:id=>@order_item},:html=>{:class=>'form-horizontal'}) do |f| %>
   <%= f.error_messages %>
-  <%= f.hidden_field :paper_order_id,:value=>@paper_order.id %>
-  <%= f.hidden_field :school_id,:value=>@school.id %>
+  <%= f.hidden_field :paper_order_id%>
+  <%= f.hidden_field :school_id%>
   <span>高一 （输入数量为试卷份数）</span>
   <div class="control-group">
 <label class="control-label" for="inputEmail">语文</label>
 <div class="controls">
-<input type="text" id="inputEmail" placeholder="试卷份数" name="order_item[g1yw]" />
+  <%= f.text_field :g1yw %>
+
 </div>
 </div>
   <div class="control-group">
 <label class="control-label" for="inputEmail">数学</label>
 <div class="controls">
-<input type="text" id="inputEmail" placeholder="试卷份数" name="order_item[g1sx]" />
+  <%= f.text_field :g1sx %>
+
 </div>
 </div>
   <div class="control-group">
 <label class="control-label" for="inputEmail">英语</label>
 <div class="controls">
-<input type="text" id="inputEmail" placeholder="试卷份数" name="order_item[g1yy]" />
+  <%= f.text_field :g1yy %>
+
 </div>
 </div>
   <div class="control-group">
 <label class="control-label" for="inputEmail">物理</label>
 <div class="controls">
-<input type="text" id="inputEmail" placeholder="试卷份数" name="order_item[g1wl]" />
+  <%= f.text_field :g1wl %>
+
 </div>
 </div>
   <div class="control-group">
 <label class="control-label" for="inputEmail">化学</label>
 <div class="controls">
-<input type="text" id="inputEmail" placeholder="试卷份数" name="order_item[g1hx]" />
+  <%= f.text_field :g1hx %>
+
 </div>
 </div>
   <div class="control-group">
 <label class="control-label" for="inputEmail">生物</label>
 <div class="controls">
-<input type="text" id="inputEmail" placeholder="试卷份数" name="order_item[g1sw]" />
+  <%= f.text_field :g1sw %>
+
 </div>
 </div>
 <div class="control-group">
 <label class="control-label" for="inputEmail">政治</label>
 <div class="controls">
-<input type="text" id="inputEmail" placeholder="试卷份数" name="order_item[g1zz]" />
+  <%= f.text_field :g1zz %>
+
 </div>
 </div>
   <div class="control-group">
 <label class="control-label" for="inputEmail">历史</label>
 <div class="controls">
-<input type="text" id="inputEmail" placeholder="试卷份数" name="order_item[g1ls]" />
+  <%= f.text_field :g1ls %>
+
 </div>
 </div>
   <div class="control-group">
 <label class="control-label" for="inputEmail">地理</label>
 <div class="controls">
-<input type="text" id="inputEmail" placeholder="试卷份数" name="order_item[g1dl]" />
+  <%= f.text_field :g1dl %>
+
 </div>
 </div>
   <span>
@@ -68,20 +75,20 @@
 <div class="control-group">
 <label class="control-label" for="inputEmail">文科</label>
 <div class="controls">
-<input type="text" id="inputEmail" placeholder="人数" name="order_item[g2w]" />
+  <%= f.text_field :g2w %>
+
 </div>
 </div>
   <div class="control-group">
 <label class="control-label" for="inputEmail">理科</label>
 <div class="controls">
-<input type="text" id="inputEmail" placeholder="人数" name="order_item[g2l]" />
+  <%= f.text_field :g2l %>
+
 </div>
 </div>
       <div class="form-actions">
     <button type="submit" class="btn btn-primary">提交订单</button>
     <button type="button" class="btn">取消</button>
     </div>
-<% end %>
+  <% end %>
 </div>
-<% else %>
-<% end %>

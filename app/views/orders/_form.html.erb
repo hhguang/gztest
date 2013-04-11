@@ -1,12 +1,7 @@
-
-<% if @order_item.new_record? %>
-<div>
-  <h4><%= @school.name %>订单</h4>
-<% form_for(:order_item,:url=>{:action=>'create'},:html=>{:class=>'form-horizontal'}) do |f| %>
-  <%= f.error_messages %>
+<%= f.error_messages %>
   <%= f.hidden_field :paper_order_id,:value=>@paper_order.id %>
   <%= f.hidden_field :school_id,:value=>@school.id %>
-  <span>高一 （输入数量为试卷份数）</span>
+  <span>高一</span>
   <div class="control-group">
 <label class="control-label" for="inputEmail">语文</label>
 <div class="controls">
@@ -62,7 +57,7 @@
 </div>
 </div>
   <span>
-    高二 (输入数量为考生人数）
+    高二
   </span>
 
 <div class="control-group">
@@ -81,7 +76,3 @@
     <button type="submit" class="btn btn-primary">提交订单</button>
     <button type="button" class="btn">取消</button>
     </div>
-<% end %>
-</div>
-<% else %>
-<% end %>
