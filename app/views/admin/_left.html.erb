@@ -57,6 +57,12 @@
         <i class="icon-user"></i>
         用户管理</a>
     </li>
+    <li <%= 'class="active"' if controller_name=='paper_orders' && action_name=='qx'  %> >
+
+      <a href="/paper_orders/qx/1">
+        <i class="icon-shopping-cart"></i>
+        试卷订单</a>
+    </li>
     <% end %>
     <% end %>
   </ul>

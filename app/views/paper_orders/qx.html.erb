@@ -1,0 +1,197 @@
+<div class="row-fluid">
+  <div class="span3">
+    <%= render :partial=>'/admin/left'  %>
+  </div>
+  <div class="span9">
+    <div class="navbar">
+      <div class="navbar-inner">
+        <a class="brand" href="#">试卷订单管理</a>
+        <ul class="nav">
+          <li class="dropdown active" >
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              <%= @current.name %>
+              <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+              <% @paper_orders.each do |paper_order| %>
+                <li>
+                  <%= link_to paper_order.name,:action=>'qx',:id=>paper_order %>
+                </li>
+              <% end %>
+            </ul>
+          </li>
+
+          <%#*<li><a href="#">Link</a></li>%>
+          <%#*<li><a href="#">Link</a></li>%>
+        </ul>
+
+
+      </div>
+    </div>
+
+<%#*//end top%>
+
+    <ul class="nav nav-tabs" id="myTab">      
+      <li class="active">
+        <a href="#g1" data-toggle="tab">高一订单
+        </a>
+      </li>
+      <li>
+        <a href="#g2" data-toggle="tab">高二订单
+        </a>
+      </li>
+    </ul>
+
+    <div class="tab-content">
+      <div class="tab-pane active" id="g1">
+        <a href="#" onclick="pr($('#printg1').html());"  >打印</a>
+        <div id="printg1">
+        <h3 style="text-align: center;">
+          <%= @current.name %>
+        </h3>
+        <h3 style="text-align: center;">教学质量监测方案试题高一订单</h3>
+        <table class="table table-bordered">
+          <tr>
+
+            <th  >区</th>
+            <th  >学校</th>
+
+            <th>语文</th>
+            <th>数学</th>
+            <th>英语</th>
+            <th>物理</th>
+            <th>化学</th>
+            <th>生物</th>
+            <th>政治</th>
+            <th>历史</th>
+            <th>地理</th>
+
+          </tr>
+
+          <% @schools.each do |school| %>
+            
+            <tr>
+              <td>
+                <%= @qx.name %>
+              </td>
+              <td>
+                <%= school.name %>
+              </td>
+              <td>
+               
+                <%= @school_orders[school.id].g1yw || 0  if @school_orders[school.id]%>
+              </td>
+              <td>
+                <%= @school_orders[school.id].g1sx || 0 if @school_orders[school.id]%>
+              </td>
+              <td>
+                <%= @school_orders[school.id].g1yy || 0 if @school_orders[school.id]%>
+              </td>
+              <td>
+                <%= @school_orders[school.id].g1wl || 0 if @school_orders[school.id]%>
+              </td>
+              <td>
+                <%= @school_orders[school.id].g1hx || 0 if @school_orders[school.id]%>
+              </td>
+              <td>
+                <%= @school_orders[school.id].g1sw || 0 if @school_orders[school.id]%>
+              </td>
+              <td>
+                <%= @school_orders[school.id].g1zz || 0 if @school_orders[school.id]%>
+              </td>
+              <td>
+                <%= @school_orders[school.id].g1ls || 0 if @school_orders[school.id]%>
+              </td>
+              <td>
+                <%= @school_orders[school.id].g1dl || 0 if @school_orders[school.id]%>
+              </td>
+
+            </tr>
+          <% end %>
+        </table>
+        </div>
+      </div>
+      <div class="tab-pane " id="g2">
+        <a href="#" onclick="pr($('#printg1').html());"  >打印</a>
+        <div id="printg1">
+        <h3 style="text-align: center;">
+          <%= @current.name %>
+        </h3>
+        <h3 style="text-align: center;">教学质量监测方案试题高二订单</h3>
+        <table class="table table-bordered">
+          <tr>
+
+            <th >区</th>
+            <th  >学校</th>
+
+            <th>语文</th>
+            <th>文科数学</th>
+            <th>理科数学</th>
+            <th>英语</th>
+            <th>物理</th>
+            <th>化学</th>
+            <th>生物</th>
+            <th>政治</th>
+            <th>历史</th>
+            <th>地理</th>
+          </tr>
+          <% @schools.each do |school| %>
+
+            <tr>
+              <td>
+                <%= @qx.name %>
+              </td>
+              <td>
+                <%= school.name %>
+              </td>
+              <td>
+
+                <%= @school_orders[school.id].g2yw || 0  if @school_orders[school.id]%>
+              </td>
+              <td>
+                <%= @school_orders[school.id].g2sxw || 0 if @school_orders[school.id]%>
+              </td>
+               <td>
+                <%= @school_orders[school.id].g2sxl || 0 if @school_orders[school.id]%>
+              </td>
+              <td>
+                <%= @school_orders[school.id].g2yy || 0 if @school_orders[school.id]%>
+              </td>
+              <td>
+                <%= @school_orders[school.id].g2wl || 0 if @school_orders[school.id]%>
+              </td>
+              <td>
+                <%= @school_orders[school.id].g2hx || 0 if @school_orders[school.id]%>
+              </td>
+              <td>
+                <%= @school_orders[school.id].g2sw || 0 if @school_orders[school.id]%>
+              </td>
+              <td>
+                <%= @school_orders[school.id].g2zz || 0 if @school_orders[school.id]%>
+              </td>
+              <td>
+                <%= @school_orders[school.id].g2ls || 0 if @school_orders[school.id]%>
+              </td>
+              <td>
+                <%= @school_orders[school.id].g2dl || 0 if @school_orders[school.id]%>
+              </td>
+
+            </tr>
+          <% end %>
+        </table>
+        </div>
+      </div>
+        
+    </div>
+  </div>
+</div>
+
+<script>
+
+function pr(content){
+  bdhtml=window.document.body.innerHTML;
+  window.document.body.innerHTML=content;
+  window.print();
+  window.document.body.innerHTML=bdhtml;
+}
+</script>

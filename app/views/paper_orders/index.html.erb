@@ -16,6 +16,7 @@
     <th>名称</th>
     <th>类型</th>
     <th>已提交的订单</th>
+    <th>状态</th>
     <th>操作</th>
   </tr>
 
@@ -25,6 +26,9 @@
     <td><%=h paper_order.item_type %></td>
     <td>
       <%= link_to paper_order.order_items.size,paper_order_order_items_path(paper_order) %>
+    </td>
+    <td>
+      <%= paper_order.state? ? '可提交' : "关闭" %>
     </td>
     <td><%= link_to '查看', paper_order_order_items_path(paper_order) %></td>
     <td><%= link_to '编辑', edit_paper_order_path(paper_order) %></td>

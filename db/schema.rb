@@ -54,12 +54,14 @@ ActiveRecord::Schema.define(:version => 20130411080639) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "confirmed",      :default => false
+    t.string   "handler"
+    t.string   "telephone"
   end
 
   create_table "paper_orders", :force => true do |t|
     t.string   "name"
     t.integer  "item_type"
-    t.boolean  "current"
+    t.boolean  "state"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

@@ -11,8 +11,21 @@
       <a class="btn" href="/paper_orders/new">发布</a>
     </div>
 
-    <div style="padding: 10px;">
-      <%= link_to @paper_order.name,paper_order_order_items_url(@paper_order) %>
+    <div class="navbar">
+    <div class="navbar-inner">
+    <a class="brand" href="#">
+      试卷：<%= @paper_order.name %>
+    </a>
+    <ul class="nav">
+    <li >
+        <%= link_to '订单提交状况',paper_order_order_items_url(@paper_order) %>
+      </li>
+    <li class="active">
+      <%= link_to '汇总',gather_paper_order_url(@paper_order) %>
+    </li>
+
+    </ul>
+    </div>
     </div>
 
     <ul class="nav nav-tabs" id="myTab">
@@ -135,61 +148,61 @@
             </td>
             <td></td>
             <td>
-              <%= @orders_qx[qx.id].sum{ |v| v.g1yw} %>
+              <%= @orders_qx[qx.id].sum{ |v| v.g1yw || 0 } %>
             </td>
             <td>
-              <%= @orders_qx[qx.id].sum{ |v| v.g1sx} %>
+              <%= @orders_qx[qx.id].sum{ |v| v.g1sx || 0} %>
             </td>
             <td>
-              <%= @orders_qx[qx.id].sum{ |v| v.g1yy} %>
+              <%= @orders_qx[qx.id].sum{ |v| v.g1yy || 0} %>
             </td>
             <td>
-              <%= @orders_qx[qx.id].sum{ |v| v.g1wl} %>
+              <%= @orders_qx[qx.id].sum{ |v| v.g1wl || 0} %>
             </td>
             <td>
-              <%= @orders_qx[qx.id].sum{ |v| v.g1hx} %>
+              <%= @orders_qx[qx.id].sum{ |v| v.g1hx || 0} %>
             </td>
             <td>
-              <%= @orders_qx[qx.id].sum{ |v| v.g1sw} %>
+              <%= @orders_qx[qx.id].sum{ |v| v.g1sw || 0} %>
             </td>
             <td>
-              <%= @orders_qx[qx.id].sum{ |v| v.g1zz} %>
+              <%= @orders_qx[qx.id].sum{ |v| v.g1zz || 0} %>
             </td>
             <td>
-             <%= @orders_qx[qx.id].sum{ |v| v.g1ls} %>
+             <%= @orders_qx[qx.id].sum{ |v| v.g1ls || 0} %>
             </td>
             <td>
-              <%= @orders_qx[qx.id].sum{ |v| v.g1dl} %>
+              <%= @orders_qx[qx.id].sum{ |v| v.g1dl || 0} %>
             </td>
             <td>
-              <%= @orders_qx[qx.id].sum{ |v| v.g2yw} %>
+              <%= @orders_qx[qx.id].sum{ |v| v.g2yw || 0} %>
             </td>
             <td>
-              <%= @orders_qx[qx.id].sum{ |v| v.g2sxw} %>
+              <%= @orders_qx[qx.id].sum{ |v| v.g2sxw || 0} %>
             </td>
             <td>
-              <%= @orders_qx[qx.id].sum{ |v| v.g2sxl} %>
+              <%= @orders_qx[qx.id].sum{ |v| v.g2sxl || 0} %>
             </td>
             <td>
-              <%= @orders_qx[qx.id].sum{ |v| v.g1yy} %>
+              <%= @orders_qx[qx.id].sum{ |v| v.g1yy || 0} %>
             </td>
             <td>
-              <%= @orders_qx[qx.id].sum{ |v| v.g2wl} %>
+              <%= @orders_qx[qx.id].sum{ |v| v.g2wl || 0} %>
             </td>
             <td>
-              <%= @orders_qx[qx.id].sum{ |v| v.g2hx} %>
+              <%= @orders_qx[qx.id].sum{ |v| v.g2hx || 0} %>
             </td>
             <td>
-              <%= @orders_qx[qx.id].sum{ |v| v.g2sw} %>
+              <%= @orders_qx[qx.id].sum{ |v| v.g2sw || 0} %>
             </td>
             <td>
-              <%= @orders_qx[qx.id].sum{ |v| v.g2zz} %>
+              <%= @orders_qx[qx.id].sum{ |v| v.g2zz || 0} %>
             </td>
             <td>
-              <%= @orders_qx[qx.id].sum{ |v| v.g2ls} %>
+              <%= @orders_qx[qx.id].sum{ |v| v.g2ls || 0} %>
             </td>
             <td>
-              <%= @orders_qx[qx.id].sum{ |v| v.g2dl} %>
+              <%= @orders_qx[qx.id].sum{ |v| v.g2dl || 0} %>
             </td>
             
           </tr>
@@ -200,61 +213,61 @@
             </td>
             <td></td>
             <td>
-              <%= @order_items.to_a.sum{ |v| v.g1yw} %>
+              <%= @order_items.to_a.sum{ |v| v.g1yw || 0} %>
             </td>
             <td>
-              <%= @order_items.to_a.sum {|v| v.g1yy} %>
+              <%= @order_items.to_a.sum {|v| v.g1yy || 0} %>
             </td>
             <td>
-              <%= @order_items.to_a.sum {|v| v.g1sx} %>
+              <%= @order_items.to_a.sum {|v| v.g1sx || 0} %>
             </td>
             <td>
-              <%= @order_items.to_a.sum {|v| v.g1wl} %>
+              <%= @order_items.to_a.sum {|v| v.g1wl || 0} %>
             </td>
             <td>
-              <%= @order_items.to_a.sum {|v| v.g1hx} %>
+              <%= @order_items.to_a.sum {|v| v.g1hx || 0} %>
             </td>
             <td>
-              <%= @order_items.to_a.sum {|v| v.g1sw} %>
+              <%= @order_items.to_a.sum {|v| v.g1sw || 0} %>
             </td>
             <td>
-              <%= @order_items.to_a.sum {|v| v.g1zz} %>
+              <%= @order_items.to_a.sum {|v| v.g1zz || 0} %>
             </td>
             <td>
-              <%= @order_items.to_a.sum {|v| v.g1ls} %>
+              <%= @order_items.to_a.sum {|v| v.g1ls || 0} %>
             </td>
             <td>
-              <%= @order_items.to_a.sum {|v| v.g1dl} %>
+              <%= @order_items.to_a.sum {|v| v.g1dl || 0} %>
             </td>
             <td>
-              <%= @order_items.to_a.sum {|v| v.g2yw} %>
+              <%= @order_items.to_a.sum {|v| v.g2yw || 0} %>
             </td>
             <td>
-              <%= @order_items.to_a.sum {|v| v.g2sxw} %>
+              <%= @order_items.to_a.sum {|v| v.g2sxw || 0} %>
             </td>
             <td>
-              <%= @order_items.to_a.sum {|v| v.g2sxl} %>
+              <%= @order_items.to_a.sum {|v| v.g2sxl || 0} %>
             </td>
             <td>
-              <%= @order_items.to_a.sum {|v| v.g2yy} %>
+              <%= @order_items.to_a.sum {|v| v.g2yy || 0} %>
             </td>
             <td>
-              <%= @order_items.to_a.sum {|v| v.g2wl} %>
+              <%= @order_items.to_a.sum {|v| v.g2wl || 0} %>
             </td>
             <td>
-              <%= @order_items.to_a.sum {|v| v.g2hx} %>
+              <%= @order_items.to_a.sum {|v| v.g2hx || 0} %>
             </td>
             <td>
-              <%= @order_items.to_a.sum {|v| v.g2sw} %>
+              <%= @order_items.to_a.sum {|v| v.g2sw || 0} %>
             </td>
             <td>
-              <%= @order_items.to_a.sum {|v| v.g2zz} %>
+              <%= @order_items.to_a.sum {|v| v.g2zz || 0} %>
             </td>
             <td>
-              <%= @order_items.to_a.sum {|v| v.g2ls} %>
+              <%= @order_items.to_a.sum {|v| v.g2ls || 0} %>
             </td>
             <td>
-              <%= @order_items.to_a.sum {|v| v.g2dl} %>
+              <%= @order_items.to_a.sum {|v| v.g2dl || 0} %>
             </td>
           </tr>
         </table>

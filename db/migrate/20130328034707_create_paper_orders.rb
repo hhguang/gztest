@@ -3,7 +3,7 @@ class CreatePaperOrders < ActiveRecord::Migration
     create_table :paper_orders do |t|
       t.string :name
       t.integer :item_type
-      t.boolean :current
+      t.boolean :state
 
       t.timestamps
     end

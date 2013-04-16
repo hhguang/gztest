@@ -77,6 +77,19 @@
 <input type="text" id="inputEmail" placeholder="人数" name="order_item[g2l]" />
 </div>
 </div>
+
+  <div class="control-group">
+<label class="control-label" for="inputEmail">经办人</label>
+<div class="controls">
+  <%= f.text_field :handler,:placeholder=>'姓名' %>
+</div>
+  </div>
+  <div class="control-group">
+<label class="control-label" for="inputEmail">电话</label>
+<div class="controls">
+  <%= f.text_field :telephone,:placeholder=>'电话号码' %>
+</div>
+</div>
       <div class="form-actions">
     <button type="submit" class="btn btn-primary">提交订单</button>
     <button type="button" class="btn">取消</button>

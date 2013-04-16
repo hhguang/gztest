@@ -11,24 +11,34 @@
       <a class="btn" href="/paper_orders/new">发布</a>
     </div>
 
-
+    <div class="well">
 
 <% form_for(@paper_order) do |f| %>
   <%= f.error_messages %>
 
   <p>
     <label>名称</label><br />
-    <%= f.text_field :name %>
+    <div class="input-append">
+      <%= f.text_field :name,:id=>"appendedInput" %>
+      
+      <span class="add-on">教学质量监测方案试题订单</span>
+      </div>
+    
+    
   </p>
   <p>
     <label>类型</label><br />
-    <%= f.text_field :item_type %>
+    <%= f.select :item_type,PaperOrder::ORDER_TYPES %>
+  </p>
+  <p>
+    <label>订单状态</label><br />
+    <%= f.select :state,PaperOrder::ORDER_STATES %>
   </p>
   <p>
     <%= f.submit '保存' %>
   </p>
 <% end %>
-
+</div>
 <%= link_to 'Show', @paper_order %> |
 <%= link_to 'Back', paper_orders_path %>
 

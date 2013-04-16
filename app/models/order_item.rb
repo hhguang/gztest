@@ -2,7 +2,7 @@ class OrderItem < ActiveRecord::Base
   belongs_to :paper_order
   belongs_to :school
 
-  validates_presence_of :paper_order_id,:school_id
+  validates_presence_of :paper_order_id,:school_id,:handler,:telephone
   validates_numericality_of :g1yw,:g1sx,:g1yy,:g1wl,:g1hx,:g1sw,:g1zz,:g1ls,:g1dl,:g2w,:g2l,:g2yw,:g2sxw,:g2sxl,:g2yy,:g2wl,:g2hx,:g2sw,:g2zz,:g2ls,:g2dl,:g3w,:g3l,:g3yw,:g3sxw,:g3sxl,:g3yy,:g3wz,:g3lz,
     :allow_nil=>true,
     :only_integer=>true,

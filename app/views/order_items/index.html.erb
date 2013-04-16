@@ -11,8 +11,21 @@
       <a class="btn" href="/paper_orders/new">发布</a>
     </div>
 
-    <div style="padding: 10px;">
-      <%= link_to @paper_order.name,paper_order_order_items_url(@paper_order) %>
+    <div class="navbar">
+    <div class="navbar-inner">
+    <a class="brand" href="#">
+      试卷：<%= @paper_order.name %>
+    </a>
+    <ul class="nav">
+    <li class="active">
+        <%= link_to '订单提交状况',paper_order_order_items_url(@paper_order) %>
+      </li>
+    <li>
+      <%= link_to '汇总',gather_paper_order_url(@paper_order) %>
+    </li>
+    
+    </ul>
+    </div>
     </div>
 
     <ul class="nav nav-tabs" id="myTab">

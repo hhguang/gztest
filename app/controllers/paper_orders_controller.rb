@@ -99,4 +99,17 @@ class PaperOrdersController < ApplicationController
     @orders_groups=@order_items.index_by{|item| item.school_id }
     @orders_qx=@order_items.group_by{ |item| item.school.qx_id }
   end
+
+  def qx
+    @paper_orders = PaperOrder.all
+    @current=PaperOrder.find_by_id(params[:id]) || @paper_orders.first
+    @qx=Qx.find(current_user.qx_id)
+    @schools=@qx.schools
+    @order_items=@current.order_items.find_by_school_id(@schools.map{|s|s.id}).to_a
+    @school_orders=@order_items.index_by{|item| item.school_id }
+    respond_to do |format|
+      format.html # index.html.erb
+      format.xml  { render :xml => @paper_orders }
+    end
+  end
 end
