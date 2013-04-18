@@ -13,6 +13,12 @@
       </div>
     </div>
     <div class="control-group">
+      <label class="control-label" for="tel">手机号码</label>
+      <div class="controls">
+        <%= f.text_field :telephone,:class=>'input-xlarge'%>
+      </div>
+    </div>
+    <div class="control-group">
       <label class="control-label" for="login">密码</label>
       <div class="controls">
         <%= f.password_field :password %>
@@ -33,8 +39,8 @@
     </div>
     
     <div class="form-actions">
-            <button type="submit" class="btn btn-primary">Save changes</button>
-            <a class="btn" href="/admin/users">Cancel</a>
+            <button type="submit" class="btn btn-primary">保存修改</button>
+            <a class="btn" href="/admin/users">取消</a>
           </div>
 
 

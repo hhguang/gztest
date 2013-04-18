@@ -6,7 +6,7 @@ ActionController::Routing::Routes.draw do |map|
    map.resources :paper_orders, :member => { :gather => :get }
 
 
-  map.resources :order_items
+#  map.resources :order_items
 
 #  map.resources :orders
 

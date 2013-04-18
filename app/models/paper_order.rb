@@ -6,10 +6,19 @@ class PaperOrder < ActiveRecord::Base
     ["毕业班",2]
   ]
 
+
+
   ORDER_STATES=[
     ["可提交",true],
     ["关闭",false]
   ]
+
+  def self.types_hash
+    ORDER_TYPES.inject({}) do |hash,value|
+      hash[value.last]=value.first
+      hash
+    end
+  end
 
   def gather
     gather={:qxes=>[],s=>{}}

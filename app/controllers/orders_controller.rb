@@ -45,7 +45,7 @@ class OrdersController < ApplicationController
   # PUT /order_items/1.xml
   def update
     @order_item = OrderItem.find(params[:id])
-
+    @school=current_user.school
     respond_to do |format|
       if @order_item.update_attributes(params[:order_item])
         

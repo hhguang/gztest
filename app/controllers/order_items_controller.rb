@@ -4,8 +4,18 @@ class OrderItemsController < ApplicationController
   # GET /order_items
   # GET /order_items.xml
   def index
-    @order_items = @paper_order.order_items
-    @unorders=School.all-@order_items.collect{|i| i.school }
+    @paper_orders = PaperOrder.all
+      @paper_order=@paper_order || @paper_orders.first
+    if current_user.qx_id
+      
+      @qx=Qx.find(current_user.qx_id)
+      @schools=@qx.schools
+      @order_items=@paper_order.order_items.find_by_school_id(@schools.map{|s|s.id}).to_a
+      @unorders=@schools-@order_items.collect{|i| i.school }
+    else
+      @order_items = @paper_order.order_items
+      @unorders=School.all-@order_items.collect{|i| i.school }
+    end
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @order_items }
@@ -62,7 +72,7 @@ class OrderItemsController < ApplicationController
 
     respond_to do |format|
       if @order_item.update_attributes(params[:order_item])
-        format.html { redirect_to(@order_item, :notice => 'OrderItem was successfully updated.') }
+        format.html { redirect_to( paper_order_order_items_url, :notice => 'OrderItem was successfully updated.') }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
@@ -86,6 +96,7 @@ class OrderItemsController < ApplicationController
   protected
 
   def find_paper_order
+    @paper_orders = PaperOrder.all
     @paper_order=PaperOrder.find(params[:paper_order_id])
   end
 end

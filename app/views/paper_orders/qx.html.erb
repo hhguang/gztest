@@ -5,31 +5,43 @@
   <div class="span9">
     <div class="navbar">
       <div class="navbar-inner">
-        <a class="brand" href="#">试卷订单管理</a>
+        <a class="brand" href="#">订单管理</a>
+
         <ul class="nav">
+          <% if current_user.qx_id.nil? %>
+        <li >
+            <%= link_to '全部订单',:controller=>'paper_orders' %>
+          </li>
+          <li>
+            <a  href="/paper_orders/new">发布新订单</a>
+          </li>
+          <% end %>
           <li class="dropdown active" >
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <%= @current.name %>
+              <%= @paper_order ? @paper_order.name : '请选择试卷'%>
               <b class="caret"></b>
             </a>
             <ul class="dropdown-menu">
               <% @paper_orders.each do |paper_order| %>
                 <li>
-                  <%= link_to paper_order.name,:action=>'qx',:id=>paper_order %>
+                  <%= link_to paper_order.name,paper_order_order_items_path(paper_order) %>
                 </li>
               <% end %>
             </ul>
           </li>
-
-          <%#*<li><a href="#">Link</a></li>%>
-          <%#*<li><a href="#">Link</a></li>%>
         </ul>
-
-
       </div>
     </div>
 
+      <div style="padding: 10px;"  class="btn-group">
+      <%= link_to '各校订单状况',paper_order_order_items_path(@paper_order),:class=>'btn' %>
+      <%= link_to '各校订单列表',{:controller=>'paper_orders',:action=>'qx',:id=>@paper_order},{:class=>'btn'} %>
+
+    </div>
+
 <%#*//end top%>
+
+    
 
     <ul class="nav nav-tabs" id="myTab">      
       <li class="active">
@@ -47,7 +59,7 @@
         <a href="#" onclick="pr($('#printg1').html());"  >打印</a>
         <div id="printg1">
         <h3 style="text-align: center;">
-          <%= @current.name %>
+          <%= @paper_order.name %>
         </h3>
         <h3 style="text-align: center;">教学质量监测方案试题高一订单</h3>
         <table class="table table-bordered">
@@ -72,7 +84,7 @@
             
             <tr>
               <td>
-                <%= @qx.name %>
+                <%= school.qx.name %>
               </td>
               <td>
                 <%= school.name %>
@@ -115,7 +127,7 @@
         <a href="#" onclick="pr($('#printg1').html());"  >打印</a>
         <div id="printg1">
         <h3 style="text-align: center;">
-          <%= @current.name %>
+          <%= @paper_order.name %>
         </h3>
         <h3 style="text-align: center;">教学质量监测方案试题高二订单</h3>
         <table class="table table-bordered">
@@ -139,7 +151,7 @@
 
             <tr>
               <td>
-                <%= @qx.name %>
+                <%= school.qx.name %>
               </td>
               <td>
                 <%= school.name %>

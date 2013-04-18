@@ -26,7 +26,7 @@ class PaperOrdersController < ApplicationController
   # GET /paper_orders/new.xml
   def new
     @paper_order = PaperOrder.new
-
+    @paper_orders = PaperOrder.all
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @paper_order }
@@ -35,6 +35,7 @@ class PaperOrdersController < ApplicationController
 
   # GET /paper_orders/1/edit
   def edit
+    @paper_orders = PaperOrder.all
     @paper_order = PaperOrder.find(params[:id])
   end
 
@@ -42,7 +43,7 @@ class PaperOrdersController < ApplicationController
   # POST /paper_orders.xml
   def create
     @paper_order = PaperOrder.new(params[:paper_order])
-
+    @paper_orders = PaperOrder.all
     respond_to do |format|
       if @paper_order.save
         format.html { redirect_to(paper_orders_url) }
@@ -58,7 +59,7 @@ class PaperOrdersController < ApplicationController
   # PUT /paper_orders/1.xml
   def update
     @paper_order = PaperOrder.find(params[:id])
-
+    @paper_orders = PaperOrder.all
     respond_to do |format|
       if @paper_order.update_attributes(params[:paper_order])
         format.html { redirect_to(paper_orders_url) }
@@ -102,14 +103,34 @@ class PaperOrdersController < ApplicationController
 
   def qx
     @paper_orders = PaperOrder.all
-    @current=PaperOrder.find_by_id(params[:id]) || @paper_orders.first
+    @paper_order=PaperOrder.find_by_id(params[:id]) || @paper_orders.first
+    if current_user.qx_id
     @qx=Qx.find(current_user.qx_id)
     @schools=@qx.schools
-    @order_items=@current.order_items.find_by_school_id(@schools.map{|s|s.id}).to_a
+    @order_items=@paper_order.order_items.find_by_school_id(@schools.map{|s|s.id}).to_a
     @school_orders=@order_items.index_by{|item| item.school_id }
+    else
+      @schools=School.all
+      @order_items = @paper_order.order_items
+      @school_orders=@order_items.index_by{|item| item.school_id }
+    end
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @paper_orders }
+    end
+  end
+
+  def qx_orders
+    @paper_orders = PaperOrder.all
+    @paper_order=PaperOrder.find_by_id(params[:id]) || @paper_orders.first
+    if current_user.qx_id
+    @qx=Qx.find(current_user.qx_id)
+    @schools=@qx.schools
+    @order_items=@paper_order.order_items.find_by_school_id(@schools.map{|s|s.id}).to_a
+    @unorders=@schools-@order_items.collect{|i| i.school }
+    else
+      @order_items = @paper_order.order_items
+      @unorders=School.all-@order_items.collect{|i| i.school }
     end
   end
 end

@@ -97,5 +97,7 @@ class WelcomeController < ApplicationController
     
   end
 
-  
+  def exam
+    
+  end
 end

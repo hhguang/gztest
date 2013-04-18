@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130411080639) do
+ActiveRecord::Schema.define(:version => 20130418084257) do
 
   create_table "exams", :force => true do |t|
     t.string   "name"
@@ -117,6 +117,7 @@ ActiveRecord::Schema.define(:version => 20130411080639) do
     t.integer  "school_id"
     t.boolean  "is_admin",                                 :default => false
     t.integer  "qx_id"
+    t.string   "telephone"
   end
 
   add_index "users", ["login"], :name => "index_users_on_login", :unique => true
